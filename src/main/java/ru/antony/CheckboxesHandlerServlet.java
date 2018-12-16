@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class CheckboxesHandlerServlet extends HttpServlet {
 
@@ -17,23 +18,31 @@ public class CheckboxesHandlerServlet extends HttpServlet {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         String[] selectedOptions = req.getParameterValues("options");
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        try {
-            PrintWriter pw = resp.getWriter();
-            pw.println("<p>");
-            pw.print("Были выбраны следующие опции:");
-            pw.println("<br/>");
-            if (selectedOptions != null) {
-                for (String option : selectedOptions) {
-                    pw.print(option);
-                    pw.println("<br/>");
+        ArrayList<String> selectedOptionLabels = null;
+        if (selectedOptions != null) {
+            selectedOptionLabels = new ArrayList<String>(selectedOptions.length);
+
+            for (String option : selectedOptions) {
+
+                if (option.equals("опция1")) {
+                    selectedOptionLabels.add("Опция 1");
                 }
-            } else {
-                pw.print("Никаких опций выбрано не было.");
+                if (option.equals("опция2")) {
+                    selectedOptionLabels.add("Опция 2");
+                }
+                if (option.equals("опция3")) {
+                    selectedOptionLabels.add("Опция 3");
+                }
             }
-            pw.print("</p>");
+        }
+        req.setAttribute("checkedLabels", selectedOptionLabels);
+
+        try {
+            req.getRequestDispatcher("confirmationservlet").forward(req, resp);
+        } catch (ServletException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

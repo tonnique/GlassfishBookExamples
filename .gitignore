@@ -1,5 +1,7 @@
 /.idea
 /.idea/*
 /target/*
+webapp/WEB-INF/classes
+webapp/WEB-INF/classes/*
 !/target/*.jar
 *.iml
