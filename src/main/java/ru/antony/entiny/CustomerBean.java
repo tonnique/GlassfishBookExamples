@@ -6,6 +6,11 @@ public class CustomerBean {
 
     public CustomerBean() { }
 
+    public CustomerBean(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -20,5 +25,14 @@ public class CustomerBean {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer fullNameBuffer = new StringBuffer();
+        fullNameBuffer.append(firstName);
+        fullNameBuffer.append(" ");
+        fullNameBuffer.append(lastName);
+        return fullNameBuffer.toString();
     }
 }
