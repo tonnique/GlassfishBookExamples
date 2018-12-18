@@ -1,0 +1,6 @@
+<strong>Application Menu</strong>
+<ul>
+    <li><a href="main.jsp">Main</a></li>
+    <li><a href="secondary.jsp">Secondary</a></li>
+</ul>
+Current page: <%= pageName %>
