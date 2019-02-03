@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 @WebServlet(urlPatterns = {"/jdbcselect2"})
 public class JDBCSelectServlet2 extends HttpServlet {
-    private final String CUSTOMER_DB_POOL_NAME = "jdbc/__CustomerDbPool";
+    //private final String CUSTOMER_DB_POOL_NAME = "jdbc/__CustomerDbPool";
+    private final String CUSTOMER_DB_POOL_NAME = "java:/jboss/CustomerDBPool";
 
     //@Resource(name = "jdbc/__CustomerDBPool")
     //private javax.sql.DataSource dataSource;
