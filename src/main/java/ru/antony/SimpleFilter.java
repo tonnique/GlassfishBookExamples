@@ -16,12 +16,10 @@ import java.util.Enumeration;
 public class SimpleFilter implements Filter {
     private FilterConfig filterConfig;
 
-    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
     }
 
-    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
         ServletContext servletContext = filterConfig.getServletContext();
@@ -40,7 +38,6 @@ public class SimpleFilter implements Filter {
         servletContext.log("Возвращаемся из сервлета");
     }
 
-    @Override
     public void destroy() {
         filterConfig = null;
     }
