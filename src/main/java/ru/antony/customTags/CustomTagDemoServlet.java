@@ -1,6 +1,6 @@
-package ru.antony;
+package ru.antony.customTags;
 
-import ru.antony.entiny.AddressBean;
+import ru.antony.entity.AddressBean;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/customtagdemo2"})
-
 public class CustomTagDemoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

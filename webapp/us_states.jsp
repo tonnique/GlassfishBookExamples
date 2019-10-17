@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="ru.antony.jdbcselect.UsStateBean" %>
+<%@page import="ru.antony.entity.UsStateBean" %>
 <%
     ArrayList<UsStateBean> stateList = (ArrayList<UsStateBean>) request.getAttribute("stateList");
 %>

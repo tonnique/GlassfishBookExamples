@@ -1,6 +1,6 @@
 package ru.antony;
 
-import ru.antony.entiny.CustomerBean;
+import ru.antony.entity.CustomerBean;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean scope="page" id="customer6" class="ru.antony.entiny.CustomerBean" />
+<jsp:useBean scope="page" id="customer6" class="ru.antony.entity.CustomerBean" />
 <jsp:setProperty name="customer6" property="firstName" value="David" />
 <jsp:setProperty name="customer6" property="lastName" value="Heffelfinger" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

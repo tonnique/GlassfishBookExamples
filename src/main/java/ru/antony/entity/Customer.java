@@ -1,26 +1,40 @@
-package ru.antony.jpa;
+package ru.antony.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.faces.bean.ManagedBean;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Set;
 
+@ManagedBean
 @Entity
 @Table(name = "CUSTOMERS")
 public class Customer implements Serializable
 {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID")
     private Long customerId;
 
     @Column(name = "FIRST_NAME")
+    @NotNull
+    @Size(min=2, max=20)
     private String firstName;
 
+
     @Column(name = "LAST_NAME")
+    @NotNull
+    @Size(min=2, max=20)
     private String lastName;
 
     private String email;
+
+    @OneToOne(mappedBy = "customer")
+    private LoginInfo loginInfo;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orders;
 
     public Long getCustomerId() {
         return customerId;
@@ -53,4 +67,12 @@ public class Customer implements Serializable
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public LoginInfo getLoginInfo() { return loginInfo; }
+
+    public void setLoginInfo(LoginInfo loginInfo) { this.loginInfo = loginInfo; }
+
+    public Set<Order> getOrders() { return orders; }
+
+    public void setOrders(Set orders) { this.orders = orders; }
 }

@@ -1,0 +1,32 @@
+package ru.antony.jsf;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlInputText;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.FacesValidator;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
+import org.apache.commons.lang3.StringUtils;
+
+@FacesValidator(value = "emailValidator")
+public class EmailValidator implements Validator {
+
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException
+    {
+        org.apache.commons.validator.routines.EmailValidator emailValidator =
+                org.apache.commons.validator.routines.EmailValidator.getInstance();
+
+        HtmlInputText htmlInputText = (HtmlInputText) uiComponent;
+
+        String email = (String) value;
+
+        if (!StringUtils.isEmpty(email)) {
+            if (!emailValidator.isValid(email)) {
+                FacesMessage facesMessage = new FacesMessage(htmlInputText.getLabel()
+                        + ": недопустимый формат email.");
+                throw new ValidatorException(facesMessage);
+            }
+        }
+    }
+}

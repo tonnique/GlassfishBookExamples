@@ -1,4 +1,4 @@
-package ru.antony.entiny;
+package ru.antony.entity;
 
 public class CustomerBean {
     private String firstName;

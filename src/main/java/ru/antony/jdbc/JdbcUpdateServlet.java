@@ -1,4 +1,4 @@
-package ru.antony.jdbcselect;
+package ru.antony.jdbc;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,8 +16,8 @@ import java.sql.SQLException;
 @WebServlet(urlPatterns = {"/jdbcupdate"})
 public class JdbcUpdateServlet extends HttpServlet {
 
-    //private final String CUSTOMER_DB_POOL_NAME = "jdbc/__CustomerDbPool";
-    private final String CUSTOMER_DB_POOL_NAME = "java:/jboss/CustomerDBPool";
+    //private final String CUSTOMER_DB_POOL_NAME = "jdbc/__CustomerDbPool"; //GlassFish
+    private final String CUSTOMER_DB_POOL_NAME = "java:jboss/datasources/mysql"; //WildFly
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,6 +1,7 @@
-package ru.antony.jdbcselect;
+package ru.antony.jdbc;
 
-import javax.annotation.Resource;
+import ru.antony.entity.UsStateBean;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -16,44 +17,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = {"/jdbcselect2"})
-public class JDBCSelectServlet2 extends HttpServlet {
-    //private final String CUSTOMER_DB_POOL_NAME = "jdbc/__CustomerDbPool";
-    private final String CUSTOMER_DB_POOL_NAME = "java:/jboss/CustomerDBPool";
-
-    //@Resource(name = "jdbc/__CustomerDBPool")
-    //private javax.sql.DataSource dataSource;
+@WebServlet(urlPatterns = {"/jdbcselect"})
+public class JDBCSelectServlet extends HttpServlet {
+    //private final String CUSTOMER_DB_POOL_NAME = "jdbc/__CustomerDbPool"; //GlassFish
+    private final String CUSTOMER_DB_POOL_NAME = "java:jboss/datasources/mysql"; //WildFly
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String sql = "select us_state_nm, us_state_cd from us_states where "
-                + "us_state_nm like ? or us_state_nm like ? order by us_state_nm";
-
+        String sql = "select us_state_nm, us_state_cd from us_states order by us_state_nm";
         ArrayList<UsStateBean> stateList = new ArrayList<UsStateBean>();
 
         try {
             InitialContext initialContext = new InitialContext();
             DataSource dataSource = (DataSource) initialContext.lookup(CUSTOMER_DB_POOL_NAME);
-
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, "North%");
-            preparedStatement.setString(2, "South%");
-
             ResultSet resultSet = preparedStatement.executeQuery();
-
-            resp.setContentType("text/html");
-
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 stateList.add(new UsStateBean(
-                    resultSet.getString("us_state_nm"),
-                    resultSet.getString("us_state_cd")
+                        resultSet.getString("us_state_nm"),
+                        resultSet.getString("us_state_cd")
                 ));
             }
-
             resultSet.close();
             preparedStatement.close();
             connection.close();

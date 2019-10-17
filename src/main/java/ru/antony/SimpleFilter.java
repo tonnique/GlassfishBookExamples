@@ -8,9 +8,7 @@ import java.util.Enumeration;
 
 @WebFilter(
         filterName = "SimpleFilter",
-        initParams = {
-           @WebInitParam(name="filterparam1", value="filtervalue1")
-        },
+        initParams = {@WebInitParam(name="filterParam1", value="filterValue1")},
         urlPatterns = {"/simpleservlet"}
     )
 public class SimpleFilter implements Filter {
@@ -22,6 +20,7 @@ public class SimpleFilter implements Filter {
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
+
         ServletContext servletContext = filterConfig.getServletContext();
         servletContext.log("Входим в doFilter()");
         servletContext.log("... инициализируем параметры: ");

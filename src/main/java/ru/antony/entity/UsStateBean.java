@@ -1,14 +1,12 @@
-package ru.antony.jdbcselect;
+package ru.antony.entity;
 
-public class UsStateBean
-{
+public class UsStateBean {
     private String stateName;
     private String stateCode;
 
     public UsStateBean() { }
 
-    public UsStateBean(String stateName, String stateCode)
-    {
+    public UsStateBean(String stateName, String stateCode) {
         this.stateName = stateName;
         this.stateCode = stateCode;
     }
