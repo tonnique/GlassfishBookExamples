@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WebSocket Chat</title>
+    <script type="text/javascript">
+        var websocket;
+
+        function init() {
+            websocket = new WebSocket('ws://localhost:8880/glassfishbook/websocketchat');
+
+            websocket.onopen = function (event) {
+                websocketOpen(event)
+            }
+            websocket.onmessage = function (event) {
+                websocketMessage(event)
+            }
+            websocket.onerror = function (event) {
+                websocketError(event)
+            }
+        }
+        
+        function websocketOpen(event) {
+            console.log("websocketOpen is invoked")
+        }
+
+        function websocketError(event) {
+            console.log("websocketError is invoked")
+        }
+
+        function websocketMessage(event) {
+            console.log("websocketMessage is invoked");
+            document.getElementById('chatwindow').value += '\r' + event.data;
+        }
+
+        function sendMessage() {
+            var userName = document.getElementById('userName').value;
+            var msg = document.getElementById('chatinput').value;
+            websocket.send(userName + ': ' + msg);
+        }
+
+        function closeConnection() {
+            websocket.close();
+        }
+
+        window.addEventListener("load", init);
+    </script>
+</h:head>
+<h:body>
+
+    <form jsf:prependId="false">
+        <input type="hidden" id="userName" value="#{user.userName}" />
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td><label for="chatwindow">Chat Window</label></td>
+                    <td><textarea id="chatwindow" rows="10" /></td>
+                </tr>
+                <tr>
+                    <td><label for="chatinput">Type Something Here</label></td>
+                    <td>
+                        <input id="chatinput" />
+                        <input id="sendBtn" type="button" value="Send" onclick="sendMessage()"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input id="exitBtn" type="button" value="Exit" onclick="closeConnection()"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</h:body>
+</html>
